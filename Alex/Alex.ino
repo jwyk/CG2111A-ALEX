@@ -461,7 +461,7 @@ void setup() {
   alexDiagonal = sqrt((ALEX_LENGTH * ALEX_LENGTH) + (ALEX_BREADTH * ALEX_BREADTH));
 
   alexCirc = PI * alexDiagonal;
-
+  setupOLED(); //Must be done before cli() otherwise it wont work (kills i2c service)
   cli();
   setupEINT();
   setupSerial();
@@ -469,6 +469,7 @@ void setup() {
   enablePullups();
   initializeState();
   sei();
+  setupOLED();
 }
 
 void handlePacket(TPacket *packet)
@@ -500,6 +501,8 @@ void loop() {
 
 // Uncomment the code below for Week 9 Studio 2
 
+//TEST
+  testdrawline();
 
  // put your main code here, to run repeatedly:
   TPacket recvPacket; // This holds commands from the Pi
