@@ -478,7 +478,7 @@ void setup()
   alexDiagonal = sqrt((ALEX_LENGTH * ALEX_LENGTH) + (ALEX_BREADTH * ALEX_BREADTH));
 
   alexCirc = PI * alexDiagonal;
-  setupOLED(); // Must be done before cli() otherwise it wont work (kills i2c service)
+  //setupOLED(); // Must be done before cli() otherwise it wont work (kills i2c service)
   cli();
   setupEINT();
   setupSerial();
@@ -486,7 +486,7 @@ void setup()
   enablePullups();
   initializeState();
   sei();
-  setupOLED();
+  
 }
 
 void handlePacket(TPacket *packet)
