@@ -291,8 +291,8 @@ int main()
 	{
 		char ch;
 		printf("Command (wasd to move, f=stop, c=clear stats, g=get stats q=exit v=scan colour)\n");
-		ch = getch();
-
+		//ch = getch();
+		scanf("%c", &ch);		
 		// Purge extraneous characters from input stream
 		flushInput();
 
