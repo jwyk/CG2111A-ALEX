@@ -12,7 +12,7 @@ int redFrequency = 0;
 int greenFrequency = 0;
 int blueFrequency = 0;
 
-void setup() {
+void colour_setup() {
   // Setting the outputs
   pinMode(S0, OUTPUT);
   pinMode(S1, OUTPUT);
@@ -30,7 +30,7 @@ void setup() {
   Serial.begin(9600);
 }
 
-void loop() {
+void colour_loop() {
   // Setting RED (R) filtered photodiodes to be read
   digitalWrite(S2,LOW);
   digitalWrite(S3,LOW);
