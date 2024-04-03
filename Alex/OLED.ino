@@ -59,7 +59,7 @@ static const unsigned char PROGMEM logo_bmp[] =
   0b00000000, 0b00110000 };
 
 void setupOLED() {
-  Serial.begin(9600);
+//  Serial.begin(9600);
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
