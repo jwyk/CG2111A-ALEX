@@ -330,6 +330,18 @@ void testdrawstyles(void) {
   delay(2000);
 }
 
+//Accepts a packet and takes the packet command for display
+void displaytext() {
+  display.clearDisplay();
+  display.setTextSize(2); // Draw 2X-scale text
+  display.setTextColor(SSD1306_WHITE);
+  display.setCursor(10, 0);
+  display.println(F("text goes here")); //Change this later
+  display.display();      // Show initial text
+
+}
+
+
 void testscrolltext(void) {
   display.clearDisplay();
 

@@ -15,7 +15,6 @@ typedef enum
   PACKET_TYPE_ERROR = 2,
   PACKET_TYPE_MESSAGE = 3,
   PACKET_TYPE_HELLO = 4
-
 } TPacketType;
 
 // Response types. This goes into the command field
@@ -26,7 +25,8 @@ typedef enum
   RESP_BAD_PACKET = 2,
   RESP_BAD_CHECKSUM = 3,
   RESP_BAD_COMMAND = 4,
-  RESP_BAD_RESPONSE = 5
+  RESP_BAD_RESPONSE = 5,
+  RESP_COLOUR = 6
 } TResponseType;
 
 // Commands

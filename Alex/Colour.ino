@@ -6,13 +6,27 @@
 #define S2 23
 #define S3 22
 #define sensorOut 24
+#define colourDelay 50
 
 // Stores frequency read by the photodiodes
-int redFrequency = 0;
-int greenFrequency = 0;
-int blueFrequency = 0;
+uint16_t redFrequency = 0;
+uint16_t greenFrequency = 0;
+uint16_t blueFrequency = 0;
 
-void colour_setup() {
+
+//Get 5 readings, and return the average frequency reading
+void averageFreq() {
+  int temp;
+  int totalFreq = 0;
+  for (int i = 0; i < 5; i++) {
+    temp = pulseIn(sensorOut, LOW);
+    totalFreq += temp;
+    delay(20);
+  }
+  return totalFreq / 5;
+}
+
+void setupColour() {
   // Setting the outputs
   pinMode(S0, OUTPUT);
   pinMode(S1, OUTPUT);
@@ -27,43 +41,49 @@ void colour_setup() {
   digitalWrite(S1,LOW);
   
    // Begins serial communication 
-  Serial.begin(9600);
+   //TODO: Delete this after review with teammates
+  //Serial.begin(9600);
 }
 
-void colour_loop() {
+void getColour() {
   // Setting RED (R) filtered photodiodes to be read
   digitalWrite(S2,LOW);
   digitalWrite(S3,LOW);
-  
-  // Reading the output frequency
-  redFrequency = pulseIn(sensorOut, LOW);
-  
-   // Printing the RED (R) value
-  Serial.print("R = ");
-  Serial.print(redFrequency);
-  delay(100);
-  
+  delay(colourDelay);
+
+  // Reading the output frequency for RED
+  redFrequency = averageFreq();
+  delay(colourDelay);
+
   // Setting GREEN (G) filtered photodiodes to be read
   digitalWrite(S2,HIGH);
   digitalWrite(S3,HIGH);
-  
-  // Reading the output frequency
-  greenFrequency = pulseIn(sensorOut, LOW);
-  
-  // Printing the GREEN (G) value  
-  Serial.print(" G = ");
-  Serial.print(greenFrequency);
-  delay(100);
+  delay(colourDelay);
+
+  // Reading the output frequency for GREEN
+  greenFrequency = averageFreq();
+  delay(colourDelay);
  
   // Setting BLUE (B) filtered photodiodes to be read
   digitalWrite(S2,LOW);
   digitalWrite(S3,HIGH);
+  delay(colourDelay);
   
-  // Reading the output frequency
-  blueFrequency = pulseIn(sensorOut, LOW);
-  
-  // Printing the BLUE (B) value 
-  Serial.print(" B = ");
-  Serial.println(blueFrequency);
-  delay(100);
+  // Reading the output frequency for BLUE
+  blueFrequency = averageFreq();
+  delay(colourDelay);
+}
+
+//Create a Colour packet and send out the response
+void sendColour() {
+  //TODO: Check if this works
+  TPacket colourpacket;
+  colourpacket.packetType = PACKET_TYPE_RESPONSE;
+  colourpacket.command = RESP_COLOUR;
+
+  colourPacket.params[0] = redFrequency;
+  colourPacket.params[1] = greenFrequency;
+  colourPacket.params[2] = blueFrequency;  
+  //colourPacket.params[3] = dist; //Add distance as a debugging tool later to see how accurate the colour is
+  //TODO: Get the Ultrasonic sensor working.
 }

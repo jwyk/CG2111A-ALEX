@@ -61,7 +61,13 @@ void handleResponse(TPacket *packet)
 	case RESP_STATUS:
 		handleStatus(packet);
 		break;
-
+	
+	case RESP_COLOUR:
+		//Do Colour here
+		printf("Red Frequency:\t\t%d\n", packet ->params[0]);
+		printf("Green Frequency:\t\t%d\n", packet ->params[1]);
+		printf("Blue Frequency:\t\t%d\n", packet ->params[2]);
+		//printf("Colour:",);  //Have the arduino guess the colour, and then send this as a packet (need to somehow check the [data] packet if possible...)
 	default:
 		printf("Arduino is confused\n");
 	}
@@ -235,7 +241,7 @@ void sendCommand(char command)
 
 	case 'v':
 	case 'V':
-		getParams(&commandPacket);
+		//getParams(&commandPacket);
 		commandPacket.command = COMMAND_COLOUR;
 		sendPacket(&commandPacket);
 		break;
