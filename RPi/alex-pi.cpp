@@ -67,8 +67,15 @@ void handleResponse(TPacket *packet)
 		printf("Red Frequency:\t\t%d\n", packet ->params[0]);
 		printf("Green Frequency:\t\t%d\n", packet ->params[1]);
 		printf("Blue Frequency:\t\t%d\n", packet ->params[2]);
+		printf("Distance to Object:\t\t%d\n",packet -> params[3]);
+		//TODO: Colour Algorithm here!
 		break;
-		//printf("Colour:",);  //Have the arduino guess the colour, and then send this as a packet (need to somehow check the [data] packet if possible...)
+	case RESP_DIST:
+		//Do Distance here
+		printf("Distance to front:\t\t%d\t cm\n",packet -> params[0])
+		if (packet -> params[0] < 25) {
+			printf("wall close ah careful\n");
+		}
 	default:
 		printf("Arduino is confused\n");
 	}
@@ -173,7 +180,7 @@ void flushInput()
 }
 
 void getMessage(TPacket *commandPacket) {
-	printf("Enter your message to be sent: (Must be 15 chars long only!)");
+	printf("Enter your message to be sent: (Must be 31 chars long only!)");
 	scanf("%31s",&commandPacket->data);
 	flushInput();
 }
@@ -248,15 +255,20 @@ void sendCommand(char command)
 
 	case 'v':
 	case 'V':
-		//getParams(&commandPacket);
 		commandPacket.command = COMMAND_COLOUR;
 		sendPacket(&commandPacket);
 		break;
 	
 	case 'm':
 	case 'M':
-		//getMessage(&commandPacket);
+		getMessage(&commandPacket);
 		commandPacket.command = COMMAND_DISPLAY;
+		sendPacket(&commandPacket);
+		break;
+	
+	case 'l':
+	case 'L':
+		commandPacket.command = COMMAND_DIST;
 		sendPacket(&commandPacket);
 		break;
 	default:
@@ -309,7 +321,7 @@ int main()
 	while (!exitFlag)
 	{
 		char ch;
-		printf("Command (wasd to move, f=stop, c=clear stats, g=get stats q=exit v=scan colour)\n");
+		printf("Command (wasd to move, f=stop, c=clear stats, g=get stats q=exit v=scan colour m=display message l=ultrasonic distance)\n");
 		//ch = getch();
 		scanf("%c", &ch);		
 		// Purge extraneous characters from input stream
