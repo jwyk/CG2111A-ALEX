@@ -1,6 +1,4 @@
-#include "packet.h"
-
-// TCS230 or TCS3200 pins wiring to Arduino
+// Pin mapping
 #define S0 26
 #define S1 25
 #define S2 23
@@ -9,9 +7,9 @@
 #define colourDelay 50
 
 // Stores frequency read by the photodiodes
-uint16_t redFrequency = 0;
-uint16_t greenFrequency = 0;
-uint16_t blueFrequency = 0;
+uint32_t redFrequency = 0;
+uint32_t greenFrequency = 0;
+uint32_t blueFrequency = 0;
 
 
 //Get 5 readings, and return the average frequency reading
@@ -84,6 +82,7 @@ void sendColour() {
   colourPacket.params[0] = redFrequency;
   colourPacket.params[1] = greenFrequency;
   colourPacket.params[2] = blueFrequency;  
-  //colourPacket.params[3] = dist; //Add distance as a debugging tool later to see how accurate the colour is
+  colourPacket.params[3] = getDistUltra(); //Add distance as a debugging tool later to see how accurate the colour is
   //TODO: Get the Ultrasonic sensor working.
+  sendResponse(&colourPacket);
 }
