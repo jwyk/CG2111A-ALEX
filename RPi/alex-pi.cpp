@@ -67,6 +67,7 @@ void handleResponse(TPacket *packet)
 		printf("Red Frequency:\t\t%d\n", packet ->params[0]);
 		printf("Green Frequency:\t\t%d\n", packet ->params[1]);
 		printf("Blue Frequency:\t\t%d\n", packet ->params[2]);
+		break;
 		//printf("Colour:",);  //Have the arduino guess the colour, and then send this as a packet (need to somehow check the [data] packet if possible...)
 	default:
 		printf("Arduino is confused\n");
@@ -171,6 +172,12 @@ void flushInput()
 		;
 }
 
+void getMessage(TPacket *commandPacket) {
+	printf("Enter your message to be sent: (Must be 15 chars long only!)");
+	scanf("%31s",&commandPacket->data);
+	flushInput();
+}
+
 void getParams(TPacket *commandPacket)
 {
 	printf("Enter distance/angle in cm/degrees (e.g. 50) and power in %% (e.g. 75) separated by space.\n");
@@ -243,6 +250,13 @@ void sendCommand(char command)
 	case 'V':
 		//getParams(&commandPacket);
 		commandPacket.command = COMMAND_COLOUR;
+		sendPacket(&commandPacket);
+		break;
+	
+	case 'm':
+	case 'M':
+		//getMessage(&commandPacket);
+		commandPacket.command = COMMAND_DISPLAY;
 		sendPacket(&commandPacket);
 		break;
 	default:

@@ -438,18 +438,15 @@ void handleCommand(TPacket *command)
     break;
   case COMMAND_COLOUR:
     sendOK();
-    // getcolourfunction
     //getColour();
     //sendColour();
     break;
-
-    /*
-     * Implement code for other commands here.
-     *
-     */
-
+  case COMMAND_DISPLAY:
+    sendOK();
+    //displayMessage(command->data);
+    break;
   default:
-    sendBadCommand();
+    sendBadCommand(command->data);
   }
 }
 

@@ -63,7 +63,7 @@ void setupOLED() {
 
   // SSD1306_SWITCHCAPVCC = generate display voltage from 3.3V internally
   if(!display.begin(SSD1306_SWITCHCAPVCC, SCREEN_ADDRESS)) {
-    Serial.println(F("SSD1306 allocation failed"));
+    Serial.println(F("SSD1306 allocation failed")); //THIS SHOULD NOT HAPPEN
     for(;;); // Don't proceed, loop forever
   }
 
@@ -331,14 +331,13 @@ void testdrawstyles(void) {
 }
 
 //Accepts a packet and takes the packet command for display
-void displaytext() {
+void displaytext(*char message) {
   display.clearDisplay();
   display.setTextSize(2); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(10, 0);
-  display.println(F("text goes here")); //Change this later
+  display.println(F(message)); //Display the text 
   display.display();      // Show initial text
-
 }
 
 
