@@ -432,6 +432,10 @@ void handleCommand(TPacket *command)
     sendStatus();
     sendOK();
     break;
+  case COMMAND_STOP:
+    sendOK();
+    stop();
+    break;
   case COMMAND_CLEAR_STATS:
     sendOK();
     clearOneCounter(command->params[0]);
@@ -498,7 +502,7 @@ void setup()
   startSerial();
   enablePullups();
   initializeState();
-  //setupColour();
+  setupColour();
   sei();
   
 }
