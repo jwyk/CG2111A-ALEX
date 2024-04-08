@@ -442,12 +442,16 @@ void handleCommand(TPacket *command)
     break;
   case COMMAND_COLOUR:
     sendOK();
-    //getColour();
-    //sendColour();
+    getColour();
+    sendColour();
     break;
   case COMMAND_DISPLAY:
     sendOK();
     //displayMessage(command->data);
+    break;
+  case COMMAND_DIST:
+    sendOK();
+    sendDist();
     break;
   default:
     sendBadCommand();
