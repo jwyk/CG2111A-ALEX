@@ -446,7 +446,7 @@ void handleCommand(TPacket *command)
     //displayMessage(command->data);
     break;
   default:
-    sendBadCommand(command->data);
+    sendBadCommand();
   }
 }
 

@@ -1,4 +1,4 @@
-
+#include "packet.h"
 
 // TCS230 or TCS3200 pins wiring to Arduino
 #define S0 26
@@ -15,7 +15,7 @@ uint16_t blueFrequency = 0;
 
 
 //Get 5 readings, and return the average frequency reading
-void averageFreq() {
+int averageFreq() {
   int temp;
   int totalFreq = 0;
   for (int i = 0; i < 5; i++) {
@@ -77,9 +77,9 @@ void getColour() {
 //Create a Colour packet and send out the response
 void sendColour() {
   //TODO: Check if this works
-  TPacket colourpacket;
-  colourpacket.packetType = PACKET_TYPE_RESPONSE;
-  colourpacket.command = RESP_COLOUR;
+  TPacket colourPacket;
+  colourPacket.packetType = PACKET_TYPE_RESPONSE;
+  colourPacket.command = RESP_COLOUR;
 
   colourPacket.params[0] = redFrequency;
   colourPacket.params[1] = greenFrequency;

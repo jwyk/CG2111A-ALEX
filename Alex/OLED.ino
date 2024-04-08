@@ -331,12 +331,12 @@ void testdrawstyles(void) {
 }
 
 //Accepts a packet and takes the packet command for display
-void displaytext(*char message) {
+void displaytext(char *message) {
   display.clearDisplay();
   display.setTextSize(2); // Draw 2X-scale text
   display.setTextColor(SSD1306_WHITE);
   display.setCursor(10, 0);
-  display.println(F(message)); //Display the text 
+  display.println(message); //Display the text 
   display.display();      // Show initial text
 }
 
