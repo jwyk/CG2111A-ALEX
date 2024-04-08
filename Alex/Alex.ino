@@ -447,7 +447,7 @@ void handleCommand(TPacket *command)
     break;
   case COMMAND_DISPLAY:
     sendOK();
-    //displayMessage(command->data);
+    displaytext(command->data);
     break;
   case COMMAND_DIST:
     sendOK();
@@ -502,11 +502,11 @@ void setup()
   //setupOLED(); // Must be done before cli() otherwise it wont work (kills i2c service)
   cli();
   setupEINT();
+  setupColour();
   setupSerial();
   startSerial();
   enablePullups();
   initializeState();
-  setupColour();
   sei();
   
 }

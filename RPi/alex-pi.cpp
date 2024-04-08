@@ -72,10 +72,11 @@ void handleResponse(TPacket *packet)
 		break;
 	case RESP_DIST:
 		//Do Distance here
-		printf("Distance to front:\t\t%d\t cm\n",packet -> params[0]);
+		printf("Distance to front:\t%d cm\n",packet -> params[0]);
 		if (packet -> params[0] < 25) {
-			printf("wall close ah careful\n");
+			printf("ah see lah anyhow get so close\n");
 		}
+		break;
 	default:
 		printf("Arduino is confused\n");
 	}
