@@ -49,6 +49,65 @@ void handleStatus(TPacket *packet)
 	printf("\n---------------------------------------\n\n");
 }
 
+float getPercentDiff(uint32_t a, uint32_t b)
+{
+	uint32_t diff = (a > b) ? a - b : b - a;
+	uint32_t large = (a > b) ? a : b;
+	return (float)diff / large * 100.0;
+}
+
+bool range(int answer, int lower, int upper)
+{
+	if (answer > lower && answer < upper)
+	{
+		return true;
+	}
+	return false;
+}
+
+void handleColour(TPacket *packet)
+{
+	uint32_t red = packet->params[0];
+	uint32_t green = packet->params[1];
+	uint32_t blue = packet->params[2];
+	uint32_t distance = packet->params[3];
+
+	printf("\n --------- ALEX COLOR SENSOR --------- \n\n");
+	printf("Red (R) frequency:\t%d\n", red);
+	printf("Green (G) frequency:\t%d\n", green);
+	printf("Blue (B) frequency:\t%d\n", blue);
+	printf("Distance:\t\t%d cm\n\n", distance);
+
+	// Colour thresholds
+	uint32_t ored[6] = {400, 460, 350, 450, 310, 400};
+	uint32_t ogreen[6] = {420, 450, 230, 260, 260, 300};
+	uint32_t owhite[6] = {200, 250, 130, 180, 110, 160};
+
+	float redGreenDiff = getPercentDiff(red, green);
+	float blueGreenDiff = getPercentDiff(blue, green);
+
+	printf("Red Green diff:\t\t%0.2lf%\n", redGreenDiff);
+	printf("Blue Green diff:\t%0.2lf%\n", blueGreenDiff);
+
+	// Determine color
+	if (range(red, ored[0], ored[1]) && range(green, ored[2], ored[3]) && range(blue, ored[4], ored[5]))
+	{
+		printf("\n RED! \n");
+	}
+	else if (range(red, ogreen[0], ogreen[1]) && range(green, ogreen[2], ogreen[3]) && range(blue, ogreen[4], ogreen[5]))
+	{
+		printf("\n Green! \n");
+	}
+	else if (range(red, owhite[0], owhite[1]) && range(green, owhite[2], owhite[3]) && range(blue, owhite[4], owhite[5]))
+	{
+		printf("\n WHITE! \n");
+	}
+	else
+	{
+		printf("\n UNKOWN! \n");
+	}
+}
+
 void handleResponse(TPacket *packet)
 {
 	// The response code is stored in command
@@ -61,19 +120,21 @@ void handleResponse(TPacket *packet)
 	case RESP_STATUS:
 		handleStatus(packet);
 		break;
-	
+
 	case RESP_COLOUR:
-		//Do Colour here
-		printf("Red Frequency:\t\t%d\n", packet ->params[0]);
-		printf("Green Frequency:\t\t%d\n", packet ->params[1]);
-		printf("Blue Frequency:\t\t%d\n", packet ->params[2]);
-		printf("Distance to Object:\t\t%d\n",packet -> params[3]);
-		//TODO: Colour Algorithm here!
+		// Do Colour here
+		printf("Red Frequency:\t\t%d\n", packet->params[0]);
+		printf("Green Frequency:\t\t%d\n", packet->params[1]);
+		printf("Blue Frequency:\t\t%d\n", packet->params[2]);
+		printf("Distance to Object:\t\t%d\n", packet->params[3]);
+		// TODO: Colour Algorithm here!
+		handleColour(packet);
 		break;
 	case RESP_DIST:
-		//Do Distance here
-		printf("Distance to front:\t%d cm\n",packet -> params[0]);
-		if (packet -> params[0] < 25) {
+		// Do Distance here
+		printf("Distance to front:\t%d cm\n", packet->params[0]);
+		if (packet->params[0] < 25)
+		{
 			printf("ah see lah anyhow get so close\n");
 		}
 		break;
@@ -180,9 +241,10 @@ void flushInput()
 		;
 }
 
-void getMessage(TPacket *commandPacket) {
+void getMessage(TPacket *commandPacket)
+{
 	printf("Enter your message to be sent: (Must be 31 chars long only!)");
-	scanf("%31s",&commandPacket->data);
+	scanf("%31s", &commandPacket->data);
 	flushInput();
 }
 
@@ -259,14 +321,14 @@ void sendCommand(char command)
 		commandPacket.command = COMMAND_COLOUR;
 		sendPacket(&commandPacket);
 		break;
-	
+
 	case 'm':
 	case 'M':
 		getMessage(&commandPacket);
 		commandPacket.command = COMMAND_DISPLAY;
 		sendPacket(&commandPacket);
 		break;
-	
+
 	case 'l':
 	case 'L':
 		commandPacket.command = COMMAND_DIST;
@@ -323,8 +385,8 @@ int main()
 	{
 		char ch;
 		printf("Command (wasd to move, f=stop, c=clear stats, g=get stats q=exit v=scan colour m=display message l=ultrasonic distance)\n");
-		//ch = getch();
-		scanf("%c", &ch);		
+		// ch = getch();
+		scanf("%c", &ch);
 		// Purge extraneous characters from input stream
 		flushInput();
 
