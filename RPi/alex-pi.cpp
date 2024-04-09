@@ -49,6 +49,13 @@ void handleStatus(TPacket *packet)
 	printf("\n---------------------------------------\n\n");
 }
 
+float getPercentDiff(uint32_t a, uint32_t b)
+{
+	uint32_t diff = (a > b) ? a - b : b - a;
+	uint32_t large = (a > b) ? a : b;
+	return (float)diff / large * 100.0;
+}
+
 void handleColour(TPacket *packet)
 {
 	uint32_t red = packet->params[0];
