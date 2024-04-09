@@ -1,5 +1,5 @@
-//SDA pin to be connected to pin 20
-//SCL pin to be connected to pin 21, both for arudino mega 2560
+// SDA pin to be connected to pin 20
+// SCL pin to be connected to pin 21, both for arudino mega 2560
 
 #include <LiquidCrystal_I2C.h>
 
@@ -33,28 +33,30 @@ void setup() {
 void loop() {}
 */
 
-//uncomment the top part only when you want to find the address of the LCD
+// uncomment the top part only when you want to find the address of the LCD
 
-LiquidCrystal_I2C lcd(0x27,16,2);
+LiquidCrystal_I2C lcd(0x27, 16, 2);
 
 void lcd_setup()
 {
-  lcd.init(); //initialise display
-  lcd.clear(); //clear display buffer
+  lcd.begin(); // initialise display
+  lcd.clear(); // clear display buffer
 }
 
-void write_message(char* message)
-{  
-  lcd.setCursor(1,1);
+void write_message(char *message)
+{
+  lcd.setCursor(1, 1);
   lcd.print(message);
 }
 
-void flash_message(char* message)
+void flash_message(char *message)
 {
   int currenttime = millis();
   write_message(message);
-  while(millis() != (currenttime + 1000));
+  while (millis() != (currenttime + 1000))
+    ;
   lcd.clear();
-  while(millis() != (currenttime + 2000));
+  while (millis() != (currenttime + 2000))
+    ;
   write_message(message);
 }

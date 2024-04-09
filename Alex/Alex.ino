@@ -322,12 +322,12 @@ ISR(INT3_vect)
 // with bare-metal code.
 void setupSerial()
 {
-  //Uncomment later for bare metal [IT WONT WORK BECAUSE OUR PACKET IS TOO BIG]
+  // Uncomment later for bare metal [IT WONT WORK BECAUSE OUR PACKET IS TOO BIG]
   ////b = round((16*10^6) / (16 * 96000)) - 1  = 103
-  //UBBR0H = 0;
-  //UBBR0L = 103;
-  //UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); //Set to 8 bits
-  //UCSR0A = 0; //Turn off U2X0 (Double Transmission)
+  // UBBR0H = 0;
+  // UBBR0L = 103;
+  // UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); //Set to 8 bits
+  // UCSR0A = 0; //Turn off U2X0 (Double Transmission)
 
   // Change Serial to Serial2/Serial3/Serial4 in later labs when using the other UARTs
 }
@@ -338,8 +338,8 @@ void setupSerial()
 
 void startSerial()
 {
-  //Uncomment later for bare metal
-  //UCSR0B = (1 << RXEN0) | (1 << TXEN0) //Enable UART Receiver and Transmitter
+  // Uncomment later for bare metal
+  // UCSR0B = (1 << RXEN0) | (1 << TXEN0) //Enable UART Receiver and Transmitter
   Serial.begin(9600);
 }
 
@@ -349,10 +349,10 @@ void startSerial()
 
 int readSerial(char *buffer)
 {
-  //Uncomment later for bare metal
-  //while (UCSR0A & (1 << RXC0) == 0);
-  //buffer[0] = UDR0;
-  //return 1;
+  // Uncomment later for bare metal
+  // while (UCSR0A & (1 << RXC0) == 0);
+  // buffer[0] = UDR0;
+  // return 1;
   int count = 0;
 
   // Change Serial to Serial2/Serial3/Serial4 in later labs when using other UARTs
@@ -368,11 +368,11 @@ int readSerial(char *buffer)
 
 void writeSerial(const char *buffer, int len)
 {
-  //Uncomment later for bare metal
-  //for (int i = 0; i < len; i++) {
-  //  while (UCSR0A * (1 << UDRE0) == 0);
-  //  UDR0 = buffer[i];
-  //}
+  // Uncomment later for bare metal
+  // for (int i = 0; i < len; i++) {
+  //   while (UCSR0A * (1 << UDRE0) == 0);
+  //   UDR0 = buffer[i];
+  // }
   Serial.write(buffer, len);
   // Change Serial to Serial2/Serial3/Serial4 in later labs when using other UARTs
 }
@@ -448,8 +448,9 @@ void handleCommand(TPacket *command)
     sendColour();
     break;
   case COMMAND_DISPLAY:
+    lcd_setup();
+    write_message(command->data);
     sendOK();
-    displaytext(command->data);
     break;
   case COMMAND_DIST:
     sendOK();
@@ -501,7 +502,7 @@ void setup()
   alexDiagonal = sqrt((ALEX_LENGTH * ALEX_LENGTH) + (ALEX_BREADTH * ALEX_BREADTH));
 
   alexCirc = PI * alexDiagonal;
-  //setupOLED(); // Must be done before cli() otherwise it wont work (kills i2c service)
+  // setupOLED(); // Must be done before cli() otherwise it wont work (kills i2c service)
   cli();
   setupEINT();
   setupColour();
@@ -511,7 +512,6 @@ void setup()
   initializeState();
   lcd_setup();
   sei();
-  
 }
 
 void handlePacket(TPacket *packet)
