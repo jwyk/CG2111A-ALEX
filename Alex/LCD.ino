@@ -35,6 +35,8 @@ void loop() {}
 
 //uncomment the top part only when you want to find the address of the LCD
 
+LiquidCrystal_I2C lcd(0x27,16,2);
+
 void lcd_setup()
 {
   lcd.init(); //initialise display
