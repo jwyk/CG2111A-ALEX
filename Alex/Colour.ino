@@ -56,7 +56,6 @@ void getColour() {
 
   // Reading the output frequency for RED
   redFrequency = averageFreq();
-  redColor = map(redFrequency, XX, XX, 255,0);
   delay(colourDelay);
 
   // Setting GREEN (G) filtered photodiodes to be read
