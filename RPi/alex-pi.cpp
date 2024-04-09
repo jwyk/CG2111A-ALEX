@@ -79,7 +79,7 @@ void handleColour(TPacket *packet)
 	printf("Distance:\t\t%d cm\n\n", distance);
 
 	// Colour thresholds
-	uint32_t ored[6] = {300, 384, 350, 395, 310, 360};
+	uint32_t ored[6] = {300, 384, 350, 450, 310, 400};
 	uint32_t ogreen[6] = {420, 450, 230, 260, 260, 300};
 	uint32_t owhite[6] = {200, 250, 130, 180, 110, 160};
 
