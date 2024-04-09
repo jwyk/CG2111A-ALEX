@@ -56,6 +56,15 @@ float getPercentDiff(uint32_t a, uint32_t b)
 	return (float)diff / large * 100.0;
 }
 
+bool range(int answer, int lower, int upper)
+{
+	if (answer > lower && answer < upper)
+	{
+		return true;
+	}
+	return false;
+}
+
 void handleColour(TPacket *packet)
 {
 	uint32_t red = packet->params[0];
@@ -69,38 +78,28 @@ void handleColour(TPacket *packet)
 	printf("Blue (B) frequency:\t%d\n", blue);
 	printf("Distance:\t\t%d cm\n\n", distance);
 
+	// Colour thresholds
+	uint32_t ored[6] = {0, 0, 1, 1, 2, 2};
+	uint32_t ogreen[6] = {0, 0, 1, 1, 2, 2};
+	uint32_t owhite[6] = {0, 0, 1, 1, 2, 2};
+
 	// Determine color
-	const int COLOR_THRESHOLD = 10;
-	const int RED_THRESHOLD = 1000;
-	const int GREEN_THRESHOLD = 25;
-	const int DIST_THRESHOLD = 10;
-
-	float redGreenDiff = getPercentDiff(red, green);
-	float blueGreenDiff = getPercentDiff(blue, green);
-
-	printf("Red Green diff:\t\t%0.2lf%\n", redGreenDiff);
-	printf("Blue Green diff:\t%0.2lf%\n", blueGreenDiff);
-
-	if (redGreenDiff >= COLOR_THRESHOLD and distance <= DIST_THRESHOLD)
+	if (range(red, ored[0], ored[1]) && range(green, ored[2], ored[3]) && range(blue, ored[4], ored[5]))
 	{
-		if (red < green)
-		{
-			if (green > RED_THRESHOLD)
-				printf("\nRED!\n");
-			else
-				printf("\nORANGE!\n");
-		}
-		else
-		{
-			if (blueGreenDiff < GREEN_THRESHOLD)
-				printf("\nGREEN!\n");
-			else
-				printf("\nBLUE!\n");
-		}
+		printf("\n RED! \n");
+	}
+	else if (range(red, ogreen[0], ogreen[1]) && range(green, ogreen[2], ogreen[3]) && range(blue, ogreen[4], ogreen[5]))
+	{
+		printf("\n WHITE! \n");
+	}
+	else if (range(red, owhite[0], owhite[1]) && range(green, owhite[2], owhite[3]) && range(blue, owhite[4], owhite[5]))
+	{
+		printf("\n WHITE! \n");
 	}
 	else
-		printf("\nNo color detected!\n");
-	printf("\n--------------------------------------\n\n");
+	{
+		printf("\n UNKOWN! \n");
+	}
 }
 
 void handleResponse(TPacket *packet)
