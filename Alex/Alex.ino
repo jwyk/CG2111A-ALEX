@@ -510,8 +510,8 @@ void setup()
   startSerial();
   enablePullups();
   initializeState();
-  lcd_setup();
   sei();
+  lcd_setup();
 }
 
 void handlePacket(TPacket *packet)
