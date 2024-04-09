@@ -448,7 +448,6 @@ void handleCommand(TPacket *command)
     sendColour();
     break;
   case COMMAND_DISPLAY:
-    lcd_setup();
     write_message(command->data);
     sendOK();
     break;
