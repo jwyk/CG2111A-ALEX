@@ -11,6 +11,11 @@ uint32_t redFrequency = 0;
 uint32_t greenFrequency = 0;
 uint32_t blueFrequency = 0;
 
+uint32_t redColor = 0;
+uint32_t greenColor = 0;
+uint32_t blueColor = 0;
+
+
 
 //Get 5 readings, and return the average frequency reading
 int averageFreq() {
@@ -51,6 +56,7 @@ void getColour() {
 
   // Reading the output frequency for RED
   redFrequency = averageFreq();
+  redColor = map(redFrequency, XX, XX, 255,0);
   delay(colourDelay);
 
   // Setting GREEN (G) filtered photodiodes to be read

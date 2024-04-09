@@ -79,9 +79,9 @@ void handleColour(TPacket *packet)
 	printf("Distance:\t\t%d cm\n\n", distance);
 
 	// Colour thresholds
-	uint32_t ored[6] = {0, 0, 1, 1, 2, 2};
-	uint32_t ogreen[6] = {0, 0, 1, 1, 2, 2};
-	uint32_t owhite[6] = {0, 0, 1, 1, 2, 2};
+	uint32_t ored[6] = {324, 364, 362, 383, 323, 347};
+	uint32_t ogreen[6] = {435, 443, 245, 250, 280, 284};
+	uint32_t owhite[6] = {218,223, 153, 154, 135, 141};
 
 	// Determine color
 	if (range(red, ored[0], ored[1]) && range(green, ored[2], ored[3]) && range(blue, ored[4], ored[5]))
@@ -90,7 +90,7 @@ void handleColour(TPacket *packet)
 	}
 	else if (range(red, ogreen[0], ogreen[1]) && range(green, ogreen[2], ogreen[3]) && range(blue, ogreen[4], ogreen[5]))
 	{
-		printf("\n WHITE! \n");
+		printf("\n Green! \n");
 	}
 	else if (range(red, owhite[0], owhite[1]) && range(green, owhite[2], owhite[3]) && range(blue, owhite[4], owhite[5]))
 	{
