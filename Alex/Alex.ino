@@ -1,3 +1,5 @@
+#include <LiquidCrystal_I2C.h>
+
 #include <serialize.h>
 #include <stdarg.h>
 #include "packet.h"
@@ -507,6 +509,7 @@ void setup()
   startSerial();
   enablePullups();
   initializeState();
+  lcd_setup();
   sei();
   
 }
