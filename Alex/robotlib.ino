@@ -38,17 +38,18 @@ void move(float speed, int direction)
       case CW:
         //motorFL.run(BACKWARD);
         //motorFR.run(FORWARD);
-        motorFL.run(STOP);
+        motorFL.run(BACKWARD);
         motorFR.run(STOP);
         motorBL.run(FORWARD);
-        motorBR.run(BACKWARD); 
+        motorBR.run(STOP);
+       //motorBR.run(BACKWARD); 
       break;
       case CCW:
         //motorFL.run(FORWARD);
         //motorFR.run(BACKWARD);
         motorFL.run(STOP);
-        motorFR.run(STOP);
-        motorBL.run(BACKWARD);
+        motorFR.run(BACKWARD);
+        motorBL.run(STOP);
         motorBR.run(FORWARD); 
       break;
       case STOP:
