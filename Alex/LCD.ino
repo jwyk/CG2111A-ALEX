@@ -37,6 +37,7 @@ void loop() {}
 
 LiquidCrystal_I2C lcd(0x27, 16, 2);
 
+
 void lcd_setup()
 {
   lcd.begin(); // initialise display
@@ -60,3 +61,4 @@ void flash_message(char *message)
     ;
   write_message(message);
 }
+
