@@ -36,14 +36,18 @@ void move(float speed, int direction)
         motorBR.run(BACKWARD); 
       break;
       case CW:
-        motorFL.run(BACKWARD);
-        motorFR.run(FORWARD);
+        //motorFL.run(BACKWARD);
+        //motorFR.run(FORWARD);
+        motorFL.run(STOP);
+        motorFR.run(STOP);
         motorBL.run(FORWARD);
         motorBR.run(BACKWARD); 
       break;
       case CCW:
-        motorFL.run(FORWARD);
-        motorFR.run(BACKWARD);
+        //motorFL.run(FORWARD);
+        //motorFR.run(BACKWARD);
+        motorFL.run(STOP);
+        motorFR.run(STOP);
         motorBL.run(BACKWARD);
         motorBR.run(FORWARD); 
       break;
@@ -88,13 +92,13 @@ void backward(float dist, float speed)
 void ccw(float dist, float speed)
 {
   dir = (TDirection) LEFT;
-  move(speed, CCW);
+  move(speed, CW);
 }
 
 void cw(float dist, float speed)
 {
    dir = (TDirection) RIGHT;
-  move(speed, CW);
+  move(speed, CCW);
 }
 
 void stop()
