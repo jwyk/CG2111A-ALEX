@@ -49,7 +49,7 @@ void move(float speed, int direction)
         //motorFR.run(BACKWARD);
         motorFL.run(FORWARD);
         motorFR.run(STOP);
-        motorBL.run();
+        motorBL.run(BACKWARD);
         motorBR.run(FORWARD); 
       break;
       case STOP:
