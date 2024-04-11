@@ -326,7 +326,7 @@ void setupSerial()
   ////b = round((16*10^6) / (16 * 96000)) - 1  = 103
   // UBBR0H = 0;
   // UBBR0L = 103;
-  // UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); //Set to 8 bits
+  // UCSR0C = (1 << UCSZ01) | (1 << UCSZ00); //Set to 8N1, 8 bits char, no parity, 1 stop bit?
   // UCSR0A = 0; //Turn off U2X0 (Double Transmission)
 
   // Change Serial to Serial2/Serial3/Serial4 in later labs when using the other UARTs

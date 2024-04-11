@@ -88,6 +88,5 @@ void sendColour() {
   colourPacket.params[1] = greenFrequency;
   colourPacket.params[2] = blueFrequency;  
   colourPacket.params[3] = getDistUltra(); //Add distance as a debugging tool later to see how accurate the colour is
-  //TODO: Get the Ultrasonic sensor working.
   sendResponse(&colourPacket);
 }
