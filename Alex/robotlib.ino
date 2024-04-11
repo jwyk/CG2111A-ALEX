@@ -47,8 +47,8 @@ void move(float speed, int direction)
       case CCW:
         //motorFL.run(FORWARD);
         //motorFR.run(BACKWARD);
-        motorFL.run(FORWARD);
-        motorFR.run(STOP);
+        motorFL.run(STOP);
+        motorFR.run(BACKWARD);
         motorBL.run(BACKWARD);
         motorBR.run(FORWARD); 
       break;
