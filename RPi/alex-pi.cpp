@@ -10,7 +10,7 @@
 #include "termios.h"
 #include "constants.h"
 
-#define PORT_NAME "/dev/ttyACM0"
+#define PORT_NAME "/dev/ttyACM1"
 #define BAUD_RATE B9600
 
 int exitFlag = 0;
