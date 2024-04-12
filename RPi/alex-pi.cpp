@@ -149,19 +149,19 @@ void handleResponse(TPacket *packet)
 
 	case RESP_COLOUR:
 		// Do Colour here
-		printf("Red Frequency:\t\t%d\n", packet->params[0]);
-		printf("Green Frequency:\t\t%d\n", packet->params[1]);
-		printf("Blue Frequency:\t\t%d\n", packet->params[2]);
-		printf("Distance to Object:\t\t%d\n", packet->params[3]);
+		//printf("Red Frequency:\t\t%d\n", packet->params[0]);
+		//printf("Green Frequency:\t\t%d\n", packet->params[1]);
+		//printf("Blue Frequency:\t\t%d\n", packet->params[2]);
+		//printf("Distance to Object:\t\t%d\n", packet->params[3]);
 		// TODO: Colour Algorithm here!
 		handleColour(packet);
 		break;
 	case RESP_DIST:
 		// Do Distance here
 		printf("Distance to front:\t%d cm\n", packet->params[0]);
-		if (packet->params[0] < 25)
+		if (packet->params[0] < 5)
 		{
-			printf("ah see lah anyhow get so close\n");
+			printf("A little close...\n");
 		}
 		break;
 	default:
