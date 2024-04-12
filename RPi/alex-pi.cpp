@@ -120,14 +120,17 @@ void handleColour(TPacket *packet)
 	{
 		printf("\n UNKOWN! \n");
 	} */
-	if (red - green < 15 || green - red < 15) printf("\nWhite!\n");
-  else {
+	if ( distance >=8){
+		printf("\n TOO FAR! \n");
+	} else {
+		if (red - green < 15 || green - red < 15) printf("\nWhite!\n");
+	  else {
       if (redColor > greenColor) {
         printf("\nRED!\n");
       } else {
         printf("\nGREEN!\n");
       }
-  }
+  	}
 }
 
 void handleResponse(TPacket *packet)
