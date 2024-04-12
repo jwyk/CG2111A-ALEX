@@ -46,6 +46,7 @@ void lcd_setup()
 
 void write_message(char *message)
 {
+  lcd.clear();
   lcd.setCursor(1, 1);
   lcd.print(message);
 }
