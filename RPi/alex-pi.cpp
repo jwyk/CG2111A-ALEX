@@ -9,6 +9,7 @@
 #include "unistd.h"
 #include "termios.h"
 #include "constants.h"
+#include <math.h>
 
 #define PORT_NAME "/dev/ttyACM0"
 #define BAUD_RATE B9600
@@ -119,7 +120,7 @@ void handleColour(TPacket *packet)
 	{
 		printf("\n UNKOWN! \n");
 	} */
-	if (abs(red - green) < 10) printf("\nWhite!\n");
+	if (red - green < 10 || green - red < 10) printf("\nWhite!\n");
   else {
       if (redColor > greenColor) {
         printf("\nRED!\n");
