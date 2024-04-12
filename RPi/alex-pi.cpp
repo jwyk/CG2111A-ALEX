@@ -119,12 +119,12 @@ void handleColour(TPacket *packet)
 	{
 		printf("\n UNKOWN! \n");
 	} */
-	if (abs(red - green) < 10) Serial.println("-White");
+	if (abs(red - green) < 10) printf("\nWhite!\n");
   else {
       if (redColor > greenColor) {
-        Serial.println("- RED");
+        printf("\nRED!\n");
       } else {
-        Serial.println("- GREEN");
+        printf("\nGREEN!\n");
       }
   }
 }
