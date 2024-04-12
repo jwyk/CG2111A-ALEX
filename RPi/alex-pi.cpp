@@ -120,7 +120,7 @@ void handleColour(TPacket *packet)
 	{
 		printf("\n UNKOWN! \n");
 	} */
-	if (red - green < 10 || green - red < 10) printf("\nWhite!\n");
+	if (red - green < 15 || green - red < 15) printf("\nWhite!\n");
   else {
       if (redColor > greenColor) {
         printf("\nRED!\n");
