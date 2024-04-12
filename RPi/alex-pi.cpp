@@ -71,6 +71,8 @@ void handleColour(TPacket *packet)
 	uint32_t green = packet->params[1];
 	uint32_t blue = packet->params[2];
 	uint32_t distance = packet->params[3];
+	uint32_t redColor = packet->params[4];
+	uint32_t greenColor = packet->params[5];
 
 	printf("\n --------- ALEX COLOR SENSOR --------- \n\n");
 	printf("Red (R) frequency:\t%d\n", red);
@@ -79,7 +81,7 @@ void handleColour(TPacket *packet)
 	printf("Distance:\t\t%d cm\n\n", distance);
 
 	// Colour thresholds
-	uint32_t ored[6] = {400, 460, 350, 450, 310, 400};
+	/*uint32_t ored[6] = {400, 460, 350, 450, 310, 400};
 	uint32_t ogreen[6] = {420, 450, 230, 260, 260, 300};
 	uint32_t owhite[6] = {200, 250, 130, 180, 110, 160};
 
@@ -105,7 +107,15 @@ void handleColour(TPacket *packet)
 	else
 	{
 		printf("\n UNKOWN! \n");
-	}
+	} */
+	if (abs(red - green) < 10) Serial.println("-White");
+  else {
+      if (redColor > greenColor) {
+        Serial.println("- RED");
+      } else {
+        Serial.println("- GREEN");
+      }
+  }
 }
 
 void handleResponse(TPacket *packet)

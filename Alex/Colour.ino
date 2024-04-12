@@ -56,6 +56,7 @@ void getColour() {
 
   // Reading the output frequency for RED
   redFrequency = averageFreq();
+  redColor = map(redFrequency, 305, 373, 255, 0);
   delay(colourDelay);
 
   // Setting GREEN (G) filtered photodiodes to be read
@@ -65,6 +66,7 @@ void getColour() {
 
   // Reading the output frequency for GREEN
   greenFrequency = averageFreq();
+  greenColor = map(greenFrequency, 287, 356, 255, 0);
   delay(colourDelay);
  
   // Setting BLUE (B) filtered photodiodes to be read
@@ -88,5 +90,7 @@ void sendColour() {
   colourPacket.params[1] = greenFrequency;
   colourPacket.params[2] = blueFrequency;  
   colourPacket.params[3] = getDistUltra(); //Add distance as a debugging tool later to see how accurate the colour is
+  colourPacket.params[4] = redColor;
+  colourPacket.params[5] = greenColor;  
   sendResponse(&colourPacket);
 }
