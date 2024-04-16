@@ -125,7 +125,7 @@ void handleColour(TPacket *packet)
 	} else {
 		if (red < 300 && green < 300) printf("\nWhite!\n");
 	  else {
-      if (redColor < greenColor) {
+      if (red < green) { //Compare frequencies from source, not mapped values
         printf("\nRED!\n");
       } else {
         printf("\nGREEN!\n");
