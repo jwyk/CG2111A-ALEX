@@ -123,7 +123,7 @@ void handleColour(TPacket *packet)
 	if (distance >=8){
 		printf("\n TOO FAR! \n");
 	} else {
-		if (red < 300 && green < 300) printf("\nWhite!\n");
+		if (red < 310 && green < 310) printf("\nWhite!\n");
 	  else {
       if (red < green) { //Compare frequencies from source, not mapped values
         printf("\nRED!\n");
