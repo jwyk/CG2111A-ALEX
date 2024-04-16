@@ -123,9 +123,9 @@ void handleColour(TPacket *packet)
 	if (distance >=8){
 		printf("\n TOO FAR! \n");
 	} else {
-		if (red - green < 15 || green - red < 15) printf("\nWhite!\n");
+		if (red < 300 && green < 300) printf("\nWhite!\n");
 	  else {
-      if (redColor > greenColor) {
+      if (redColor < greenColor) {
         printf("\nRED!\n");
       } else {
         printf("\nGREEN!\n");
