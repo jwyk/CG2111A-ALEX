@@ -81,45 +81,6 @@ void handleColour(TPacket *packet)
 	printf("Blue (B) frequency:\t%d\n", blue);
 	printf("Distance:\t\t%d cm\n\n", distance);
 
-	// Colour thresholds
-	/*uint32_t ored[6] = {400, 460, 350, 450, 310, 400};
-	// Determine color
-	const int COLOR_THRESHOLD = 10;
-	const int RED_THRESHOLD = 1000;
-	const int GREEN_THRESHOLD = 25;
-	const int DIST_THRESHOLD = 10;
-	uint32_t ored[6] = {400, 460, 350, 450, 310, 400};
-	uint32_t ogreen[6] = {420, 450, 230, 260, 260, 300};
-	uint32_t owhite[6] = {200, 250, 130, 180, 110, 160};
-
-	float redGreenDiff = getPercentDiff(red, green);
-	float blueGreenDiff = getPercentDiff(blue, green);
-
-	printf("Red Green diff:\t\t%0.2lf%\n", redGreenDiff);
-	printf("Blue Green diff:\t%0.2lf%\n", blueGreenDiff);
-
-	// Determine color
-	if (redGreenDiff >= COLOR_THRESHOLD and distance <= DIST_THRESHOLD)
-	{
-		if (red < green)
-		{
-			if (green > RED_THRESHOLD)
-				printf("\nRED!\n");
-			else
-				printf("\nORANGE!\n");
-		}
-		else
-		{
-			if (blueGreenDiff < GREEN_THRESHOLD)
-				printf("\nGREEN!\n");
-			else
-				printf("\nBLUE!\n");
-		}
-	}
-	else
-	{
-		printf("\n UNKOWN! \n");
-	} */
 	if (distance >=8){
 		printf("\n TOO FAR! \n");
 	} else {
